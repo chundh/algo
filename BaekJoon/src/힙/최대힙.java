@@ -24,6 +24,9 @@ public class ÃÖ´ëÈü {
 				}
 			}
 		}
+		for(int i=0; i<n; i++) {
+			System.out.println(arr.poll());
+		}
 	}
 
 }
