@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class ³×Æ®¿öÅ© {
+public class ï¿½ï¿½Æ®ï¿½ï¿½Å© {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -15,23 +15,23 @@ public class ³×Æ®¿öÅ© {
 		int count=0;
 		for(int i=0; i<computers.length; i++) {
 			for(int j=i+1; j<computers.length; j++) {
-				if(computers[i][j]==1) { //i¿Í j°¡ ¿¬°áµÇ¾îÀÖ´Â °æ¿ì
+				if(computers[i][j]==1) { //iï¿½ï¿½ jï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½
 					for(int k=0; k<arr.size(); k++) {
 						if(arr.get(k).contains(i)) {
-							System.out.println(k+"¹øÂ° ¸®½ºÆ®¿¡ " + i + "Á¸Àç");
+							System.out.println(k+"ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ " + i + "ï¿½ï¿½ï¿½ï¿½");
 							arr.get(k).add(j);
 							flag=1;
 							count++;
 						}
 						else if(arr.get(k).contains(j)) {
-							System.out.println(k+"¹øÂ° ¸®½ºÆ®¿¡ " + j + "Á¸Àç");
+							System.out.println(k+"ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ " + j + "ï¿½ï¿½ï¿½ï¿½");
 							arr.get(k).add(i);
 							flag=1;
 							count++;
 						}
 					}
 					if(flag==0) {
-						System.out.println("ÇöÀç ³ëµåÁß¿¡"+ i + " , " + j + "°¡ Ãß°¡µÇ¾îÀÖ´Â ³ëµå°¡ ¾øÀ½.");
+						System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ß¿ï¿½"+ i + " , " + j + "ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ç¾ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½.");
 						LinkedList<Integer> lt = new LinkedList<Integer>();
 						lt.add(i);
 						lt.add(j);
@@ -47,7 +47,7 @@ public class ³×Æ®¿öÅ© {
 
 }
 
-/* dfs·Î Ç¬ Á¤´äÄÚµå
+/* dfsï¿½ï¿½ Ç¬ ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½
  class Solution {
     static boolean[][] visited;
     public int solution(int n, int[][] computers) {
