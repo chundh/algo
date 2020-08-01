@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class ��Ʈ��ũ {
+public class 네트워크 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -15,23 +15,23 @@ public class ��Ʈ��ũ {
 		int count=0;
 		for(int i=0; i<computers.length; i++) {
 			for(int j=i+1; j<computers.length; j++) {
-				if(computers[i][j]==1) { //i�� j�� ����Ǿ��ִ� ���
+				if(computers[i][j]==1) { //i占쏙옙 j占쏙옙 占쏙옙占쏙옙퓸占쏙옙獵占� 占쏙옙占�
 					for(int k=0; k<arr.size(); k++) {
 						if(arr.get(k).contains(i)) {
-							System.out.println(k+"��° ����Ʈ�� " + i + "����");
+							System.out.println(k+"占쏙옙째 占쏙옙占쏙옙트占쏙옙 " + i + "占쏙옙占쏙옙");
 							arr.get(k).add(j);
 							flag=1;
 							count++;
 						}
 						else if(arr.get(k).contains(j)) {
-							System.out.println(k+"��° ����Ʈ�� " + j + "����");
+							System.out.println(k+"占쏙옙째 占쏙옙占쏙옙트占쏙옙 " + j + "占쏙옙占쏙옙");
 							arr.get(k).add(i);
 							flag=1;
 							count++;
 						}
 					}
 					if(flag==0) {
-						System.out.println("���� ����߿�"+ i + " , " + j + "�� �߰��Ǿ��ִ� ��尡 ����.");
+						System.out.println("占쏙옙占쏙옙 占쏙옙占쏙옙傷占�"+ i + " , " + j + "占쏙옙 占쌩곤옙占실억옙占쌍댐옙 占쏙옙弱� 占쏙옙占쏙옙.");
 						LinkedList<Integer> lt = new LinkedList<Integer>();
 						lt.add(i);
 						lt.add(j);
@@ -47,7 +47,7 @@ public class ��Ʈ��ũ {
 
 }
 
-/* dfs�� Ǭ �����ڵ�
+/* dfs占쏙옙 푼 占쏙옙占쏙옙占쌘듸옙
  class Solution {
     static boolean[][] visited;
     public int solution(int n, int[][] computers) {

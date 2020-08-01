@@ -1,3 +1,5 @@
+package algo;
+
 import java.util.Scanner;
 
 public class 더위피하기_15938 {

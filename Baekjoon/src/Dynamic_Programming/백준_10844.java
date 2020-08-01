@@ -11,12 +11,14 @@ public class น้มุ_10844 {
 		int num = 8;
 		int sub = 7;
 		int answer = 9;
-		for(int i=2; i<=n; i++) {
-			answer += num;
-			num += sub;
-			sub += 2;
+		if(n!=1) {
+			for(int i=2; i<=n; i++) {
+				answer += num;
+				num += sub;
+				sub += 2;
+			}
 		}
-		System.out.println(answer%1000000000);
+		System.out.println(answer/1000000000);
 	}
 
 }
