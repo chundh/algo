@@ -2,9 +2,9 @@ package Dynamic_Programming;
 
 import java.util.Scanner;
 
-//가장 긴 증가하는 부분 수열
+//가장 큰 감소하는 수열
 
-public class 백준_11053 {
+public class 백준_11072 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -16,15 +16,13 @@ public class 백준_11053 {
 			arr[i] = sc.nextInt();
 			list[i] = 1;
 		}
-		
-		list[0] = 1;
-		int max = 0;
-		for(int i=1; i<n; i++) {
+		for(int i=0; i<n; i++) {
 			for(int j=0; j<i; j++) {
-				if(arr[j]<arr[i] && list[j]>=list[i])
-					list[i] = list[j]+1;
+				if(list[j]>=list[i] && arr[i]<arr[j])
+					list[i] = list[j] + 1;
 			}
 		}
+		int max = 0;
 		for(int i=0; i<n; i++) {
 			if(max<list[i])
 				max = list[i];
