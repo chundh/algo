@@ -16,18 +16,40 @@ public class 베스트앨범 {
  
 		// Note: this comparator imposes orderings that are inconsistent with equals.    
 		public int compare(String a, String b) {
-			if (base.get(a) >= base.get(b)) { //반대로 하면 오름차순 <=
+			if (base.get(a) > base.get(b)) { //반대로 하면 오름차순 <=
 				return -1;
-			} else {
+			}else if(base.get(a)==base.get(b)) {
+				int a_len = a.length();
+				int b_len = b.length();
+				if(a_len>b_len)
+					return -1;
+				else if(a_len==b_len) {
+					for(int i=0; i<a_len; i++) {
+						if(a.charAt(i)<b.charAt(i)) {
+							return -1;
+						}
+						else if(a.charAt(i)==b.charAt(i)) {
+							continue;
+						}
+						else
+							return 1;
+					}
+				}
+				else {
+					return 1;
+				}
+			}
+			else {
 				return 1;
 			} // returning 0 would merge keys
+			return 1;
 		}
 	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String[] genres = {"classic","pop","classic","pop","classic","classic"};
-		int[] plays = {400,600,150,2500,500,500};
+		String[] genres = {"classic", "pop", "classic", "classic", "pop", "a", "a", "a"}; //a:10, b:6 d:6 c:5 
+		int[] plays = {500, 600, 501, 800, 900, 1000, 1000, 1000};
 		int[] data = new int[plays.length];
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		for(int i=0;i <genres.length; i++) {
@@ -44,7 +66,7 @@ public class 베스트앨범 {
 		
 		for(String key : keySet) {
 			flag=0;
-			System.out.println(key);
+			System.out.println(key + " , " + map.get(key));
 			for(int i=0; i<genres.length; i++) {
 				if(key.equals(genres[i])) {
 					int max=0;
