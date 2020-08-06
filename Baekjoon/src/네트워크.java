@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
-
+/*
 public class 네트워크 {
 
 	public static void main(String[] args) {
