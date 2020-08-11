@@ -1,9 +1,7 @@
-package SCPC_5회_예선;
+package SCPC_5_minor;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Scanner;
 
 public class 파이프 {
@@ -15,6 +13,7 @@ public class 파이프 {
 		int T = sc.nextInt();
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		for(int test_case = 0; test_case < T; test_case++) {
+			arr.clear();
 			int answer = 0;
 			int n = sc.nextInt();
 			data[] data = new data[n];
@@ -26,7 +25,8 @@ public class 파이프 {
 				comp[i] = len;
 			}
 			Arrays.sort(data);
-			int idx = 0;
+			arr.add(data[0].len);
+			int idx = 1;
 			while(true) {
 				if(arr.size()==n)
 					break;
@@ -45,9 +45,7 @@ public class 파이프 {
 				if(i==0){
 					for(int j=0; j<n; j++){
 						if(comp[j] == arr.get(0)){
-							BigDecimal val = new BigDecimal("0");
-							val = val.setScale(10);
-							ans[j] = val;
+							ans[j] = 0;
 							break;
 						}
 					}
@@ -64,12 +62,14 @@ public class 파이프 {
 					}
 				}
 			}
-			for(int i=0; i<n; i++){
-				System.out.println(ans[i]);
-			}
-			// Print the answer to standard output(screen).
 			System.out.println("Case #"+(test_case+1));
-			System.out.println(answer);
+			for(int i=0; i<n; i++){
+				if(ans[i] ==0){
+					System.out.println(String.format("%.10f", ans[i])); //결과 : 5000.000
+					continue;
+				}
+				System.out.println(String.format("%.10f",ans[i]));
+			}
 		}
 	}
 

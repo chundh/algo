@@ -1,4 +1,4 @@
-package SCPC_5È¸_¿¹¼±;
+package SCPC_5_minor;
 
 import java.util.Scanner;
 //5. 6 3 4 2 1 -> 5

@@ -1,4 +1,4 @@
-package SCPC_5È¸_¿¹¼±;
+package SCPC_5_minor;
 
 import java.util.ArrayList;
 import java.util.Scanner;
