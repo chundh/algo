@@ -1,17 +1,27 @@
 package Greedy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class 단속카메라 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[][] routes = {{-20, 15}, {-20, -15}, {-14, -5}, {-18, -13}, {-5, -3}};
-		
+		int[][] routes = {{-20, 15}, {-14, -5}, {-18, -13}, {-5, -3}};
 		solution(routes);
 	}
 	
 	public static void solution(int[][] routes) {
+		Arrays.sort(routes, new Comparator<int[]>() {
+			@Override
+			public int compare(int[] o1, int[] o2) {
+				if(o1[0]>o2[0])
+					return 1;
+				else
+					return -1;
+			}
+		});
 		ArrayList<route_data> arr = new ArrayList<route_data>();
 		for(int i=0; i<routes.length; i++) { // 현재 경계값(min, max)을 기준으로 현재 데이터 값이 min~max 밖에 들어온다면 저장할 필요 없다. 
 			int start = routes[i][0];
