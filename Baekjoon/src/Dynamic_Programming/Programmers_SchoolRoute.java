@@ -22,20 +22,33 @@ public class Programmers_SchoolRoute {
         solution(m, n, puddles);
     }
     public static void solution(int m, int n, int[][] puddles){
-        check = new int[n][m];
+        check = new int[n+1][m+1];
         for(int i=0; i<puddles.length; i++){
-            check[puddles[i][0]-1][puddles[i][1]-1] = -1;
+            check[puddles[i][0]][puddles[i][1]] = -1;
         }
-        recur(0, 0, 0);
-        System.out.println(answer%1000000007);
+        int[][] arr = new int[n+1][m+1];
+        for(int i=1; i<n+1; i++){
+            for(int j=1; j<m+1; j++){
+                if(i==1 && j==1) {
+                    arr[i][j] = 1;
+                    continue;
+                }
+                if(check[i][j] == -1)
+                    arr[i][j] = 0;
+                else
+                    arr[i][j] = arr[i-1][j] + arr[i][j-1];
+            }
+        }
+        System.out.println(arr[n][m]);
 
+
+
+        //recur(0, 0);
+        //System.out.println(answer%1000000007);
     }
 
-    public static void recur(int x, int y, int cnt){
-        if(cnt>m+n-2){
-            return;
-        }
-        if(x>=n || y>=m)
+    public static void recur(int x, int y){
+        if(x>=n || x<0 || y>=m || y<0)
             return;
         if(x==n-1 && y==m-1){
             answer++;
@@ -43,7 +56,7 @@ public class Programmers_SchoolRoute {
         }
         if(check[x][y] == -1)
             return;
-        recur(x+1, y, cnt+1);
-        recur(x, y+1, cnt+1);
+        recur(x+1, y);
+        recur(x, y+1);
     }
 }
