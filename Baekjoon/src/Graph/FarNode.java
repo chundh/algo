@@ -37,6 +37,22 @@ public class FarNode {
         int[] arr = new int[n+1];
         arr[1] = -1;
         makeLength(arr, 1, 1);
+        /*  다익스트라 알고리즘.
+            List<List<Integer>> adj_lists = new ArrayList<>();
+            PriorityQueue<Node> heap = new PriorityQueue<>(); // node를 거리순으로 오름차순 정렬하게끔 구성.
+            dists[1] = 0;
+            heap.add(new Node(1, dists[1]));
+            while (!heap.isEmpty()) {
+            Node node = heap.remove();
+            for (int indVisit: adj_lists.get(node.index)) {
+                if (node.dist + 1 < dists[indVisit]) {
+                    dists[indVisit] = node.dist + 1;
+                    heap.add(new Node(indVisit, dists[indVisit]));
+                }
+            }
+        }
+        밑에 재귀 함수보다 훨씬 효율적으로 데이터 구성이 가능하다.
+         */
         int answer = 0;
         int max = 0;
         for(int i=1; i<n+1; i++){
