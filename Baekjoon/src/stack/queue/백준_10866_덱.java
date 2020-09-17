@@ -20,7 +20,6 @@ public class น้มุ_10866_ตฆ {
 
             }else if(order.equals("pop_front")){
                 int data = sc.nextInt();
-                arr.add(data);
                 tail++;
             }else if(order.equals("pop_back")){
                 int data = sc.nextInt();
@@ -33,13 +32,11 @@ public class น้มุ_10866_ตฆ {
                 }
             }else if(order.equals("front")){
                 if(head<tail) {
-                    System.out.println(arr.get(head));
                 } else {
                     System.out.println(-1);
                 }
             } else if(order.equals("back")){
                 if(head<tail) {
-                    System.out.println(arr.get(tail-1));
                 } else {
                     System.out.println(-1);
                 }
