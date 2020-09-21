@@ -1,6 +1,5 @@
 package Dynamic_Programming;
 
-import java.io.IOException;
 import java.util.*;
 
 public class baek_1005 {
@@ -19,10 +18,8 @@ public class baek_1005 {
                 indegree[i] = 0;
             }
             arr= new int[n+1];
-            data[] data = new data[n+1];
             for(int i=1; i<=n; i++){
                 arr[i] = sc.nextInt();
-                data[i] = new data();
             }
             for(int i=0; i<k; i++){
                 int a = sc.nextInt();
@@ -65,9 +62,4 @@ public class baek_1005 {
         System.out.println(time[ans]);
     }
 
-}
-
-class data{
-    ArrayList<Integer> next = new ArrayList<>();
-    int start_time = 0;
 }

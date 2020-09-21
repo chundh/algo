@@ -1,4 +1,4 @@
-package DFS.BFS;
+package DFS;
 
 public class 단어변환 {
 	static int answer = 100; 

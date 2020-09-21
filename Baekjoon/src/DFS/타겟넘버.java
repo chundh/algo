@@ -1,4 +1,4 @@
-package DFS.BFS;
+package DFS;
 
 public class Å¸°Ù³Ñ¹ö {
 	static int cnt=0;
