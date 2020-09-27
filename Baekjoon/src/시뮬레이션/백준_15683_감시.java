@@ -1,195 +1,104 @@
 package ½Ã¹Ä·¹ÀÌ¼Ç;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ¹éÁØ_15683_°¨½Ã {
+    static class spot{
+        int x;
+        int y;
+
+        public spot(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+    static int[] dx;
+    static int[] dy;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int m = sc.nextInt();
         int[][] arr = new int[n][m];
+        int blank_cnt = 0;
+        int camera_cnt=0;
+        ArrayList<spot> camera_spot = new ArrayList<>();
+        dx = new int[]{1, 0, -1, 0};
+        dy = new int[]{0, 1, 0, -1};
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
                 arr[i][j] = sc.nextInt();
-            }
-        }
-        for(int i=0; i<n; i++){
-            for(int j=0; j<m; j++){
-                if(arr[i][j] >=1 && arr[i][j]<=5){
-                    int left=0;
-                    int right=0;
-                    int top =0;
-                    int bottom=0;
-                    int flag=0;
-                    int max=0;
-                    for(int k=j-1; k>=0; k--){ // ¿ÞÂÊ °¹¼ö ÆÄ¾Ç
-                        if(arr[i][k]==0){
-                            left++;
-                        }else if(arr[i][k]==6)
-                            break;
-                    }
-                    max = left;
-                    flag = 1;
-                    for(int k=j+1; k<m; k++){ // ¿À¸¥ÂÊ °¹¼ö ÆÄ¾Ç
-                        if(arr[i][k]==0){
-                            right++;
-                        }else if(arr[i][k]==6){
-                            break;
-                        }
-                    }
-                    if(right>left){
-                        flag=2;
-                        max = right;
-                    }
-                    for(int k=i-1; k>=0; k--){ // À§ÂÊ °¹¼ö ÆÄ¾Ç
-                        if(arr[k][j]==0){
-                            top++;
-                        }else if(arr[k][j]==6){
-                            break;
-                        }
-                    }
-                    if(top>max){
-                        max = top;
-                        flag= 3;
-                    }
-                    for(int k=i+1; k<n; k++){ // ¾Æ·¡ÂÊ °¹¼ö ÆÄ¾Ç
-                        if(arr[k][j]==0){
-                            bottom++;
-                        }else if(arr[k][j]==6){
-                            break;
-                        }
-                    }
-                    if(bottom>max){
-                        max = bottom;
-                        flag = 4;
-                    }
-                    if(arr[i][j]==1){
-                        fill(arr, i, j, flag);
-                    }else if(arr[i][j] == 2){
-                        int f = 0;
-                        if(left+right > top+bottom){
-                            f=1;
-                        }else
-                            f=2;
-                        if(f==1){
-                            fill(arr, i, j, 1);
-                            fill(arr, i, j, 2);
-                        }
-                    }else if(arr[i][j]==3){
-                        int f=0;
-                        if(left+top > left+bottom){
-                            f=1;
-                        }else{
-                            f=2;
-                        }
-                        if(right+top > right+bottom){
-                            if(f==1){
-                                if(right+top>left+top)
-                                    f=3;
-                            }else{
-                                if(right+top > left+bottom)
-                                    f=3;
-                            }
-                        }else{
-                            if(f==1){
-                                if(right+bottom>left+top)
-                                    f=3;
-                            }else{
-                                if(right+bottom > left+bottom)
-                                    f=3;
-                            }
-                        }
-                        if(f==1){
-                            fill(arr, i, j, 1);
-                            fill(arr, i, j, 3);
-                        }else if(f==2){
-                            fill(arr, i, j, 1);
-                            fill(arr, i, j, 4);
-                        }else if(f==3){
-                            fill(arr, i, j, 2);
-                            fill(arr, i, j, 3);
-                        }else{
-                            fill(arr, i, j, 2);
-                            fill(arr, i, j, 4);
-                        }
-                    }else if(arr[i][j]==4){
-                        int f=0;
-                        if(left<right)
-                            f=1;
-                        else
-                            f=2;
-                        if(top<bottom){
-                            if(f==1){
-                                if(top<left)
-                                    f=3;
-                            }
-                            else{
-                                if(top<right)
-                                    f=3;
-                            }
-                        }else{
-                            if(f==1){
-                                if(bottom<left)
-                                    f=4;
-                            }
-                            else{
-                                if(bottom<right)
-                                    f=4;
-                            }
-                        }
-                        for(int a=1; a<=4; a++){
-                            if(a==f)
-                                continue;
-                            fill(arr, i, j, a);
-                        }
-                    }else{
-                        for(int a=1; a<=4; a++){
-                            fill(arr, i, j, a);
-                        }
-                    }
+                if(arr[i][j] == 0)
+                    blank_cnt++;
+                else if(arr[i][j] == 6)
+                    continue;
+                else{
+                    camera_cnt++;
+                    camera_spot.add(new spot(i,j));
                 }
             }
         }
-        int answer=0;
-        for(int i=0; i<n; i++){
-            for(int j=0; j<m; j++){
-                if(arr[i][j] == 0){
-                    answer++;
+        int for_cnt = 3;
+        int mp4 = 4;
+        for(int i=0; i<camera_cnt-1; i++){
+            for_cnt += mp4 * 3;
+            mp4*=4;
+        }
+        int answer = 0;
+        for(int i=0; i<=for_cnt; i++){
+            int temp = i;
+            int[] direction = new int[camera_cnt];
+            for(int j=0; j<camera_cnt; j++){
+                direction[j] = temp%4;
+                temp/=4;
+            }
+            int[][] board = new int[arr.length][arr[0].length];
+            int max = 0;
+            for(int j=0; j<camera_cnt; j++){
+                spot temp_spot = camera_spot.get(j);
+                if(arr[temp_spot.x][temp_spot.y]==1){
+                    max += fill(arr, camera_spot.get(j).x, camera_spot.get(j).y, direction[j], board);
+                } else if (arr[temp_spot.x][temp_spot.y]==2) {
+                    max += fill(arr, camera_spot.get(j).x, camera_spot.get(j).y, direction[j], board);
+                    max += fill(arr, camera_spot.get(j).x, camera_spot.get(j).y, direction[j]+2, board);
+                }else if(arr[temp_spot.x][temp_spot.y]==3){
+                    max += fill(arr, camera_spot.get(j).x, camera_spot.get(j).y, direction[j], board);
+                    max += fill(arr, camera_spot.get(j).x, camera_spot.get(j).y, direction[j]+1, board);
+                }else if(arr[temp_spot.x][temp_spot.y]==4){
+                    max += fill(arr, camera_spot.get(j).x, camera_spot.get(j).y, direction[j], board);
+                    max += fill(arr, camera_spot.get(j).x, camera_spot.get(j).y, direction[j]+1, board);
+                    max += fill(arr, camera_spot.get(j).x, camera_spot.get(j).y, direction[j]+2, board);
+                }else{
+                    max += fill(arr, camera_spot.get(j).x, camera_spot.get(j).y, direction[j], board);
+                    max += fill(arr, camera_spot.get(j).x, camera_spot.get(j).y, direction[j]+1, board);
+                    max += fill(arr, camera_spot.get(j).x, camera_spot.get(j).y, direction[j]+2, board);
+                    max += fill(arr, camera_spot.get(j).x, camera_spot.get(j).y, direction[j]+3, board);
                 }
             }
+            answer = Math.max(answer, max);
         }
-        System.out.println(answer);
+        System.out.println(blank_cnt-answer);
     }
 
-    public static void fill(int[][] arr, int x, int y, int flag){
-        if(flag==1){ // ¿ÞÂÊÀ¸·Î Ä¥ÇÏ±â
-            for(int i=y-1; i>=0; i--){
-                if(arr[x][i]==6){
-                    break;
-                }else if(arr[x][i]==0)
-                    arr[x][i] = 7;
-            }
-        }else if(flag==2){ // ¿À¸¥ÂÊÀ¸·Î Ä¥ÇÏ±â
-            for(int i=y+1; i<arr[x].length; i++){
-                if(arr[x][i]==6){
-                    break;
-                }else if(arr[x][i]==0)
-                    arr[x][i] = 7;
-            }
-        }else if(flag==3){ // À§·ÎÄ¥ÇÏ±â
-            for(int i=x-1; i>=0; i--){
-                if(arr[i][y] ==6)
-                    break;
-                else if(arr[i][y]==0)
-                    arr[i][y] = 7;
-            }
-        }else{ // ¾Æ·¡·Î Ä¥ÇÏ±â
-            for(int i=x+1; i<arr.length; i++){
-                if(arr[i][y] ==6)
-                    break;
-                else if(arr[i][y]==0)
-                    arr[i][y] = 7;
+    public static int fill(int[][] arr, int x, int y, int flag, int[][] board){
+        flag %= 4;
+        int cnt=0;
+        while(true){
+            int temp_x = x + dx[flag];
+            int temp_y = y + dy[flag];
+            x = temp_x;
+            y = temp_y;
+            if(temp_x<0 || temp_x>=arr.length || temp_y<0 || temp_y>=arr[0].length)
+                break;
+            if(arr[temp_x][temp_y] == 0){
+                if(board[x][y] == 0){
+                    board[x][y] = 7;
+                    cnt++;
+                }
+            }else if(arr[temp_x][temp_y]==6){
+                break;
             }
         }
+        return cnt;
     }
 }
