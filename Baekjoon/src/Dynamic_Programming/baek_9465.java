@@ -2,98 +2,34 @@ package Dynamic_Programming;
 
 import java.util.*;
 
+/**
+ * dp[i][0] = dp[i-1][1]
+ */
+
 public class baek_9465 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
-        for(int k=0; k<t; k++){
-            int n = sc.nextInt();
-            int[][] data = new int[2][n];
-            d[] arr = new d[n*2];
-            boolean[][] check = new boolean[2][n];
-            int idx = 0;
-            int c = 0;
-            for(int i=0; i<n; i++){
-                int num = sc.nextInt();
-                data[idx][i] = num;
-                d d = new d(num, idx, i);
-                arr[c] = d;
-                c++;
-            }
-            idx++;
-            for(int i=0; i<n; i++){
-                int num = sc.nextInt();
-                data[idx][i] = num;
-                d d = new d(num, idx, i);
-                arr[c] = d;
-                c++;
-            }
-            int answer = 0;
-            int cnt = 0;
-            idx = 0;
-            Arrays.sort(arr);
-            while(true){
-                if(idx == n*2){
-                    break;
+        for(int test_case = 0; test_case<t; test_case++){
+            int m = sc.nextInt();
+            int[][] arr = new int[2][m+1];
+            for(int i=0; i<2; i++){
+                for(int j=1; j<=m; j++){
+                    arr[i][j] = sc.nextInt();
                 }
-                d d = arr[idx];
-                int num = d.num;
-                int x = d.x;
-                int y = d.y;
-                if(!check[x][y]){
-                    if(x == 0){
-                        answer += data[x][y];
-                        check[x][y] = true;
-                        cnt++;
-                        if (!check[x+1][y]) {
-                            check[x+1][y] = true;
-                            cnt++;
-                        }
-                        if (y != n - 1 && !check[x][y + 1]) {
-                            check[x][y+1] = true;
-                            cnt++;
-                        }
-                        if(y>0 && !check[x][y - 1]) {
-                            check[x][y - 1] = true;
-                            cnt++;
-                        }
-                    }
-                    else{
-                        answer += data[x][y];
-                        cnt++;
-                        check[x][y] = true;
-                        if (!check[x-1][y]) {
-                            check[x-1][y] = true;
-                            cnt++;
-                        }
-                        if (y != n - 1 && !check[x][y + 1]) {
-                            check[x][y+1] = true;
-                            cnt++;
-                        }
-                        if(y>0 && !check[x][y - 1]) {
-                            check[x][y - 1] = true;
-                            cnt++;
-                        }
-                    }
-                }
-                idx++;
             }
-            System.out.println(answer);
-        }
-    }
-}
+            int[][] dp = new int[2][m+1];
+            dp[0][0] = 0;
+            dp[1][0] = 0;
+            dp[0][1] = arr[0][1];
+            dp[1][1] = arr[1][1];
 
-class d implements Comparable<d>{
-    int num;
-    int x;
-    int y;
-    public d(int num, int x, int y) {
-        this.num = num;
-        this.x = x;
-        this.y = y;
-    }
-    @Override
-    public int compareTo(d o) {
-        return -this.num+o.num;
+            for(int i=2; i<=m; i++){
+                dp[0][i] = Math.max(dp[1][i-1], dp[1][i-2]) + arr[0][i];
+                dp[1][i] = Math.max(dp[0][i-1], dp[0][i-2]) + arr[1][i];
+            }
+
+            System.out.println(Math.max(dp[0][m], dp[1][m]));
+        }
     }
 }
