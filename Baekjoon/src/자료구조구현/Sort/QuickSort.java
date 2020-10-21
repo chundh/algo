@@ -31,7 +31,6 @@ public class QuickSort {
                 right--;
             }
         }
-        System.out.println(Arrays.toString(arr));
         return left;
     }
 
