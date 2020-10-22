@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 
 /**
- * 정해진 출발지부터 모든 노드의 최단 거리를 알 수 있다.
  * 만약 len의 값이 MAX_VALUE이면 접근할 수 없는 노드이다.
  */
 
