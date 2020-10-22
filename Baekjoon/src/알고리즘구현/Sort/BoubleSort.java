@@ -1,4 +1,4 @@
-package 자료구조구현.Sort;
+package 알고리즘구현.Sort;
 
 import java.util.Arrays;
 
