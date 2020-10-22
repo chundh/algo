@@ -14,8 +14,6 @@ public class 백준_1753_최단경로 {
             this.num = num;
             this.weight = weight;
         }
-
-
         @Override
         public int compareTo(node o) {
             return this.weight-o.weight;
