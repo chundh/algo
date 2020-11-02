@@ -25,7 +25,15 @@ public class 프로그래머스_지형이동 {
         }
         @Override
         public int compareTo(data o) {
-            return this.weight - o.weight;
+            if(this.weight>o.weight){
+                return 1;
+            }else if(this.weight==o.weight){
+                if(this.start>o.start)
+                    return 1;
+                else
+                    return -1;
+            }else
+                return -1;
         }
     }
     public static int find(int v1){
