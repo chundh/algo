@@ -66,7 +66,10 @@ public class 프로그래머스_지형이동 {
         for(int i=0; i<cnt; i++){
             parent[i] = i;
         }
+        int ansCnt=1;
         while(!priorityQueue.isEmpty()){
+            if(ansCnt==cnt-1)
+                break;
             data temp = priorityQueue.poll();
             int v1 = temp.start;
             int v2 = temp.end;
@@ -75,6 +78,7 @@ public class 프로그래머스_지형이동 {
             else{
                 answer += temp.weight;
                 union(v1, v2);
+                ansCnt++;
             }
         }
         for(int i=0; i<land.length; i++){
@@ -109,23 +113,16 @@ public class 프로그래머스_지형이동 {
     public static void findWeight(int[][] land, int[][] map, int x, int y, PriorityQueue<data> pq){
         int[] dx = {1,0,-1,0};
         int[] dy = {0,1,0,-1};
-        Queue<point> queue = new LinkedList<>();
-        queue.add(new point(x, y));
-        boolean[][] visit = new boolean[land.length][land[0].length];
-        visit[x][y] = true;
-        while(!queue.isEmpty()){
-            point temp = queue.poll();
-            for(int i=0; i<4; i++){
-                int new_x = temp.x + dx[i];
-                int new_y = temp.y + dy[i];
-                if(new_x<0 || new_x>=map.length || new_y<0 || new_y>=map[0].length)
-                    continue;
-                if(!visit[new_x][new_y]){
-                    queue.add(new point(new_x, new_y));
-                    visit[new_x][new_y] = true;
+        for(int i=0; i<map.length; i++){
+            for(int j=0; j<map[0].length; j++){
+                for(int k=0; k<4; k++){
+                    int new_x = i + dx[k];
+                    int new_y = j + dy[k];
+                    if(new_x<0 || new_x>=map.length || new_y<0 || new_y>=map[0].length)
+                        continue;
+                    if(map[new_x][new_y] > map[i][j])
+                        pq.add(new data(map[new_x][new_y], map[i][j], Math.abs(land[new_x][new_y] - land[i][j])));
                 }
-                if(map[new_x][new_y] != map[temp.x][temp.y])
-                    pq.add(new data(map[new_x][new_y], map[temp.x][temp.y], Math.abs(land[new_x][new_y] - land[temp.x][temp.y])));
             }
         }
     }
