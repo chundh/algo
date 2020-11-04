@@ -1,6 +1,8 @@
 package Summer_Winter_Coding;
 
-import java.util.ArrayList;
+/**
+ * 타겟을 이동하면서 투포인터 개념을 사용한 문제.
+ */
 
 public class 쿠키구입 {
     public static void main(String[] args) {
