@@ -1,6 +1,12 @@
 package Summer_Winter_Coding;
 
-import java.util.Arrays;
+/**
+ * dp를 사용한다.
+ * 처음과 끝이 연결된 배열인 문제이므로 두가지로 나누어서 계산한다.
+ * 1. 0~n-1까지의 배열
+ * 2. 1~n까지의 배열
+ * 이중에서 큰 dp값이 정답이다.
+ */
 
 public class 스티커모으기2 {
     public static void main(String[] args) {
