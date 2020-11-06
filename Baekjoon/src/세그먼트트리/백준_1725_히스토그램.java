@@ -33,7 +33,7 @@ public class 백준_1725_히스토그램 {
         return data[node];
     }
 
-    // left~right 구간에서 가장 높이가 작은 node의 idx
+    // left~right 구간에서 가장 높이가 작은 idx return
     public static int findidx(int node, int start, int end, int left, int right){
         if(left>end || right<start)
             return Integer.MAX_VALUE;
@@ -54,6 +54,7 @@ public class 백준_1725_히스토그램 {
             return data[node];
         }
     }
+    // left~right에서 가장 넓이가 큰것 return;
     public static long getWidth(int node, int start, int end, int left, int right){
         int minidx = findidx(node, start, end, left, right);
         int height = arr[minidx];
