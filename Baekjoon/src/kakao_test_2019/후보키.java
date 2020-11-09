@@ -1,7 +1,13 @@
 package kakao_test_2019;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+
 public class 후보키 {
 	static int answer=0;
+	static ArrayList<String> clist = new ArrayList<>();
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String[][] relation = {{"100","ryan","music","2"},{"200","apeach","math","2"},
@@ -9,22 +15,69 @@ public class 후보키 {
 		solution(relation);
 	}
 	public static void solution(String[][] relation) {
-		int flag= 0;
-		for(int i=0; i<relation[0].length; i++) {
-			flag=0;
-			for(int j=0; j<relation.length; j++) {
-				for(int k=j+1; k<relation.length; k++) {
-					if(relation[j][i] == relation[k][i]) {
-						flag=1;
-						break;
+		HashMap<String, Integer> map = new HashMap<>();
+		for (int idx = 1; idx <= relation[0].length; idx++) {
+			int n = relation[0].length;
+			int m = idx;
+			int[] arr = new int[m];
+			boolean[] check = new boolean[n];
+			back_track(n,m,0,arr,check, relation);
+		}
+		System.out.println(answer);
+	}
+	public static void back_track(int n, int m, int cnt, int[] arr, boolean[] check, String[][] relation) {
+		if(cnt==m) {
+			String d = "";
+			for (int i = 0; i < arr.length; i++) {
+				d += arr[i];
+			}
+			for (int i = 0; i < clist.size(); i++) {
+				int flag = 0;
+				for (int j = 0; j < clist.get(i).length(); j++) {
+					for (int k = 0; k < d.length(); k++) {
+						if (clist.get(i).charAt(j) == d.charAt(k)){
+							flag++;
+							break;
+						}
 					}
 				}
-				if(flag==1)
-					break;
+				if(flag==clist.get(i).length())
+					return;
 			}
-			if(flag==0)
-				System.out.println(i);
+			int temp = getResult(arr, relation);
+			if (temp!=0){
+				clist.add(d);
+			}
+			return;
+		}
+		for(int i=0; i<n; i++) {
+			if(!check[i]) {
+				if(cnt!=0 && i<=arr[cnt-1])
+					continue;
+				check[i] = true;
+				arr[cnt] = i;
+				cnt++;
+				back_track(n,m,cnt,arr,check, relation);
+				check[i] = false;
+				cnt--;
+			}
 		}
 	}
 
+	public static int getResult(int[] arr, String[][] relation){
+		HashMap<String, Integer> map = new HashMap<>();
+		for (int i = 0; i < relation.length; i++) {
+			String data = "";
+			for (int value : arr) {
+				data += relation[i][value];
+			}
+			if(map.containsKey(data)){
+				return 0;
+			}else{
+				map.put(data, 1);
+			}
+		}
+		answer++;
+		return 1;
+	}
 }
