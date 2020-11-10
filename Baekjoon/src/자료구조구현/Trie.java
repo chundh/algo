@@ -73,15 +73,10 @@ public class Trie {
 
     public static void main(String[] args) {
         Trie trie = new Trie();
-        trie.insert("abc");
-        trie.insert("abbb");
-        trie.insert("abcb");
-        trie.insert("bcad");
-        trie.insert("bb");
+        trie.insert("911");
+        trie.insert("97625999");
+        trie.insert("91125426");
 
-        trie.print();
-        System.out.println("------");
-        trie.delete("bb");
         trie.print();
     }
 }
