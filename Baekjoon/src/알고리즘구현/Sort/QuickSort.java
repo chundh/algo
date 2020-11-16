@@ -15,12 +15,12 @@ public class QuickSort {
         if(start>=end){
             return;
         }
-        int mid = partition(arr, start, end);
+        int mid = partition2(arr, start, end);
         System.out.println(Arrays.toString(arr));
         sort(arr, start, mid-1);
         sort(arr, mid+1, end);
     }
-
+    // pivot을 mid로 두었을 때
     public static int partition(int[] arr, int start, int end){
         System.out.println("Secter : " + start + " - " + end);
         int left = start;
@@ -47,6 +47,25 @@ public class QuickSort {
                 return left;
         }
         return left;
+    }
+
+    // pivot을 좌측으로 두었을 때
+    public static int partition2(int[] arr, int start, int end){
+        int left = start+1;
+        int right = end;
+        int pivot = start;
+        System.out.println(pivot);
+        while(left<=right){
+            while(left<=arr.length-1 && arr[left]<arr[pivot]) left++;
+            while(arr[right]>arr[pivot]) right--;
+            if(left<=right){
+                swap(arr, left, right);
+                left++;
+                right--;
+            }
+        }
+        swap(arr, right, pivot);
+        return right;
     }
 
     public static void swap(int[] arr, int idx1, int idx2){
