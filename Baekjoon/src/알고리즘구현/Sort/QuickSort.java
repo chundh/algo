@@ -3,10 +3,12 @@ package 알고리즘구현.Sort;
 import java.util.Arrays;
 
 public class QuickSort {
+    static int count = 0;
     public static void main(String[] args) {
         int[] arr = {1,10,5,8,7,6,4,3,2,9};
         sort(arr, 0, arr.length-1);
         System.out.println(Arrays.toString(arr));
+        System.out.println(count);
     }
 
     public static void sort(int[] arr, int start, int end){
@@ -49,6 +51,7 @@ public class QuickSort {
 
     public static void swap(int[] arr, int idx1, int idx2){
 //        System.out.println("Swap : " + arr[idx1] + " <-> " + arr[idx2]);
+        count++;
         int temp = arr[idx2];
         arr[idx2] = arr[idx1];
         arr[idx1] = temp;
