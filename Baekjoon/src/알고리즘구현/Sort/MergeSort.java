@@ -3,6 +3,7 @@ package 알고리즘구현.Sort;
 import java.util.Arrays;
 
 public class MergeSort {
+    static int count = 0;
     public static void main(String[] args) {
         int[] arr = {1,5,2,3,4,8,13,124,6,12,37};
         divide(arr, 0, arr.length-1);
