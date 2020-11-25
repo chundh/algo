@@ -48,7 +48,12 @@ public class 블록이동하기 {
         }
     }
     public static void main(String[] args) {
-        int[][] board = {{0, 0, 0, 0, 0, 0, 1}, {1, 1, 1, 1, 0, 0, 1}, {0, 0, 0, 0, 0, 0, 0}, {0, 0, 1, 1, 1, 1, 0}, {0, 1, 1, 1, 1, 1, 0}, {0, 0, 0, 0, 0, 1, 1}, {0, 0, 1, 0, 0, 0, 0}};
+        int[][] board = {{0, 0, 0, 0, 1, 0},
+                         {0, 0, 1, 1, 1, 0},
+                         {0, 1, 1, 1, 1, 0},
+                         {0, 1, 0, 0, 1, 0},
+                         {0, 0, 1, 0, 0, 0},
+                         {0, 0, 0, 0, 0, 0}};
         블록이동하기 a = new 블록이동하기();
         a.solution(board);
     }
@@ -57,9 +62,15 @@ public class 블록이동하기 {
         point d = new point(0,0, 0,0);
         Queue<point> queue = new LinkedList<>();
         queue.add(d);
+        if(board[1][0] == 0 && board[1][1]==0) {
+            d = new point(0, 0, 1, 1);
+            queue.add(d);
+        }
         boolean[][][] visit = new boolean[board.length][board[0].length][2];
         while(!queue.isEmpty()){
             point temp = queue.poll();
+            if(temp.x<0 || temp.y<0 || temp.x>=board.length || temp.y>=board.length)
+                continue;
             if(temp.opt==0){
                 if(temp.x==board.length-1 && temp.y+1 == board.length-1){
                     answer = temp.time;
@@ -82,7 +93,7 @@ public class 블록이동하기 {
             if(visit[temp.x][temp.y][temp.opt])
                 continue;
             visit[temp.x][temp.y][temp.opt] = true;
-//            System.out.println(temp.x + " , " + temp.y + " : " + temp.opt + " : " +temp.time);
+            System.out.println(temp.x + " , " + temp.y + " : " + temp.opt + " : " +temp.time);
             for (int i = 0; i < 4; i++) {
                 int x = temp.x + dx[i];
                 int y = temp.y + dy[i];
@@ -94,16 +105,20 @@ public class 블록이동하기 {
                     if(temp.opt==0){
                         if(temp.rotateRowDown(board)){
                             queue.add(new point(temp.x, temp.y+1, 1, temp.time+1));
+                            queue.add(new point(temp.x, temp.y, 1, temp.time+1));
                         }
                         if(temp.rotateRowUp(board)){
                             queue.add(new point(temp.x-1, temp.y+1, 1, temp.time+1));
+                            queue.add(new point(temp.x-1, temp.y, 1, temp.time+1));
                         }
                     }else{
                         if(temp.rotateColDown(board)){
                             queue.add(new point(temp.x+1, temp.y, 0, temp.time+1));
+                            queue.add(new point(temp.x+1, temp.y-1, 0, temp.time+1));
                         }
                         if(temp.rotateColUp(board)){
-                            queue.add(new point(temp.x+1, temp.y-1, 0, temp.time+1));
+                            queue.add(new point(temp.x, temp.y, 0, temp.time+1));
+                            queue.add(new point(temp.x, temp.y-1, 0, temp.time+1));
                         }
                     }
                 }
@@ -133,3 +148,4 @@ public class 블록이동하기 {
 }
 
 //{{0, 0, 0, 0, 0, 0, 1}, {1, 1, 1, 1, 0, 0, 1}, {0, 0, 0, 0, 0, 0, 0}, {0, 0, 1, 1, 1, 1, 0}, {0, 1, 1, 1, 1, 1, 0}, {0, 0, 0, 0, 0, 1, 1}, {0, 0, 1, 0, 0, 0, 0}
+//{0, 0, 0, 0, 1, 0}, {0, 0, 1, 1, 1, 0}, {0, 1, 1, 1, 1, 0}, {0, 1, 0, 0, 1, 0}, {0, 0, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 0}
