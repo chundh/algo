@@ -19,86 +19,98 @@ public class 백준_14890_경사로 {
             }
         }
         int answer = 0;
+        // 가로 방향 탐색
         for (int i = 0; i < n; i++) {
             int prev = map[i][0];
             int lcount = 1;
             for (int j = 1; j < n; j++) {
-                if(map[i][j] != prev){
-                    if(map[i][j] > prev){
-                        if(map[i][j] != prev+1)
-                            break;
-                        else{
-                            if(lcount<l)
-                                break;
-                        }
-                    }else if(map[i][j] < prev){
-                        if(map[i][j] != prev-1)
-                            break;
-                        else{
-                            int cnt = 0;
-                            int idx = 0;
-                            for (int k = j; k < n; k++) {
-                                if(map[i][k] == map[i][j]){
-                                    cnt++;
-                                    idx = k;
-                                }else
-                                    break;
-                            }
-                            if(cnt < l){
-                                break;
-                            }else{
-                                j = idx;
-                            }
-                        }
-                    }
-                    lcount = 1;
-                    prev = map[i][j];
-                }else{
+                if (prev == map[i][j])
                     lcount++;
+                else{
+                    // 내리막인 경우
+                    if(prev == map[i][j] + 1){
+                        int cnt = 0;
+                        int idx = 0;
+                        for (int k = j; k < n; k++) {
+                            if(map[i][k] == map[i][j]){
+                                cnt++;
+                                idx = k;
+                            }else{
+                                break;
+                            }
+                            if(cnt == l){
+                                break;
+                            }
+                        }
+                        if(cnt >= l){
+                            j = idx;
+                            lcount = 0;
+                            prev = map[i][j];
+                            if(idx == n-1){
+                                answer++;
+                                break;
+                            }
+                        }else
+                            break;
+                    }else if(prev == map[i][j] - 1){ // 오르막인 경우
+                        if(l <= lcount){
+                            prev = map[i][j];
+                            lcount = 1;
+                        }else
+                            break;
+                    }else{ // 갈 수 없는 경우
+                        break;
+                    }
                 }
                 if(j == n-1) {
                     answer++;
                 }
             }
         }
-        for (int j = 0; j < n; j++) {
-            int prev = map[0][j];
+        // 세로 방향 탐색
+        for (int i = 0; i < n; i++) {
+            int prev = map[0][i];
             int lcount = 1;
-            for (int i = 1; i < n; i++) {
-                if(map[i][j] != prev){
-                    if(map[i][j] > prev){
-                        if(map[i][j] != prev+1)
-                            break;
-                        else{
-                            if(lcount<l)
-                                break;
-                        }
-                    }else if(map[i][j] < prev){
-                        if(map[i][j] != prev-1)
-                            break;
-                        else{
-                            int cnt = 0;
-                            int idx = 0;
-                            for (int k = i; k < n; k++) {
-                                if(map[k][j] == map[i][j]){
-                                    cnt++;
-                                    idx = k;
-                                }else
-                                    break;
-                            }
-                            if(cnt < l){
-                                break;
-                            }else{
-                                i = idx;
-                            }
-                        }
-                    }
-                    lcount = 1;
-                    prev = map[i][j];
-                }else{
+            for (int j = 1; j < n; j++) {
+                if (prev == map[j][i])
                     lcount++;
+                else{
+                    // 내리막인 경우
+                    if(prev == map[j][i] + 1){
+                        int cnt = 0;
+                        int idx = 0;
+                        for (int k = j; k < n; k++) {
+                            if(map[k][i] == map[j][i]){
+                                cnt++;
+                                idx = k;
+                            }else{
+                                break;
+                            }
+                            if(cnt == l){
+                                break;
+                            }
+                        }
+                        if(cnt >= l){
+                            j = idx;
+                            lcount = 0;
+                            prev = map[j][i];
+                            if(idx==n-1){
+                                answer++;
+                                break;
+                            }
+                        }else
+                            break;
+                    }else if(prev == map[j][i] - 1){ // 오르막인 경우
+                        if(l <= lcount){
+                            prev = map[j][i];
+                            lcount = 1;
+                        }else
+                            break;
+                    }else{ // 갈 수 없는 경우
+                        break;
+                    }
                 }
-                if(i == n-1) {
+                if(j == n-1) {
                     answer++;
                 }
             }
