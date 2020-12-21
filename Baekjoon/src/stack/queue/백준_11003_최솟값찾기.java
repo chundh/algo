@@ -1,43 +1,36 @@
 package stack.queue;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Scanner;
+import java.io.*;
+import java.util.ArrayDeque;
+import java.util.StringTokenizer;
 
 public class 백준_11003_최솟값찾기 {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int l = sc.nextInt();
-        Deque<Integer> arr = new LinkedList<>();
-        int[] num = new int[n];
-        for(int i=0; i<n; i++){
-            num[i] = sc.nextInt();
-        }
-        int min = Integer.MAX_VALUE;
-        for(int i=0; i<n; i++){
-            int data = num[i];
-            if(arr.size()<l){
-                if(data<min){
-                    min = data;
-                }
-                arr.addLast(data);
-                System.out.print(arr.peek() + " ");
-            }else{
-                int temp = arr.pollFirst();
-                arr.addLast(data);
-                if(min==temp){
-                    min = Integer.MAX_VALUE;
-                    Object[] temp_arr = arr.toArray();
-                    for(int j=0; j<temp_arr.length; j++){
-                        if(min>(int)temp_arr[j]){
-                            min = (int) temp_arr[j];
-                        }
-                    }
-                }
-                System.out.print(min + " ");
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int l = Integer.parseInt(st.nextToken());
+        st = new StringTokenizer(br.readLine());
+        ArrayDeque<Integer> queue = new ArrayDeque<>();
+        int[] val = new int[n];
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            val[i] = Integer.parseInt(st.nextToken());
+            while (!queue.isEmpty() && val[queue.peekLast()] > val[i]) {
+                queue.pollLast();
             }
+            queue.offer(i);
+            if(queue.peekFirst() < i-l+1)
+                queue.pollFirst();
+            sb.append(val[queue.peekFirst()] + " ");
         }
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
     }
 }
+/*
+11 4
+1 1000 2 3 4 5 6 1001 1002 1003 1004
+ */
