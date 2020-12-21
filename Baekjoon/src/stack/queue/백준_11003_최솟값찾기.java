@@ -4,6 +4,10 @@ import java.io.*;
 import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
+/*
+ArrayDeque를 활용한 슬라이딩 윈도우 문제
+ */
+
 public class 백준_11003_최솟값찾기 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
