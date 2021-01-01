@@ -59,8 +59,10 @@ public class 백준_17135_캐슬디펜스 {
             for (int i = 0; i < info.size(); i++) {
                 int[] target = distance(info.get(i));
 //                System.out.println(target[0] + " , " + target[1]);
-                if(target[0] == -1)
+                if(target[0] == -1) {
+                    System.out.println(info.get(i));
                     continue;
+                }
                 if (map[target[0]][target[1]] == 1)
                     cnt++;
                 map[target[0]][target[1]]++;
@@ -138,3 +140,8 @@ public class 백준_17135_캐슬디펜스 {
         }
     }
 }
+/*
+2 7 2
+0 0 1 0 1 0 1
+1 0 1 0 1 0 0
+ */
